@@ -1,0 +1,27 @@
+import {connection} from '../config/config.js'
+
+async function consumeMessages(io) {
+    const queue = 'MessageQueue';
+    const {channel} = await connection(queue);
+    channel.consume(queue, async (msg)=>{
+        if(msg){
+            try{
+                const content = msg.content.toString();
+                const messages = JSON.parse(content)
+                if (Array.isArray(messages)) {
+                    for(const item of messages){
+                        io.to(`user:${item.receiver}`).emit('message', messages);
+                    }
+                } else {
+                    io.to(`user:${messages.receiver}`).emit('message', messages);
+                }
+                channel.ack(msg)
+            }catch(e){
+                console.error(e);
+                channel.nack(msg, false, false);
+                return;
+            }
+        }
+    })
+}
+export {consumeMessages}
