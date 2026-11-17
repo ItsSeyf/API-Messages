@@ -45,6 +45,7 @@ io.on('connection',(socket)=>{
     socket.join(`user:${username}`);
 } )
 
+app.set("trust proxy", 1)
 app.use(json())
 app.use(corsMiddleware())
 app.use(cookieParser());
