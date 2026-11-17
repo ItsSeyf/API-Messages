@@ -268,7 +268,6 @@ export class MessagesModel {
     }
     static async editMessage({ input }) {
         const { id, messages, username} = input;
-        messages += ` (Edited by: ${username} at: ${new Date().toISOString()})`;
         try {
             const result = await db.execute({
                 sql: 'select id from messages where id = :id and sender = :username',
@@ -302,7 +301,7 @@ export class MessagesModel {
                 return null;
             }
             const remove = await db.execute({
-                sql: 'update messages set messages =null where id = :id',
+                sql: 'delete from messages where id = :id',
                 args: { id }
             })
             if (!remove || remove.rowsAffected === 0) {
