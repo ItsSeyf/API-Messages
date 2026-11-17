@@ -44,6 +44,7 @@ io.on('connection',(socket)=>{
     }
     socket.join(`user:${username}`);
 } )
+app.set('io', io);
 
 app.use(json())
 app.use(corsMiddleware())

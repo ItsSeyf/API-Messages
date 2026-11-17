@@ -109,20 +109,24 @@ export class MessagesController {
     }
     static async editMessage(req, res) {
         const { username } = req.user;
-        const {id, messages} = req.body;
+        const {id, messages, receiver} = req.body;
         const result = await MessagesModel.editMessage({input: { username, id, messages} })
         if (result === null) {
             return res.status(500).json({ message: 'Message not edited' })
         }
+        const io = req.app.get('io');
+        io.to(`user:${receiver}`).emit('message:edited', {id, messages})
         return res.status(200).json({ message: 'Message edited' })
     }
     static async delteMessage(req, res) {
         const { username } = req.user;
-        const {id} = req.body;
+        const {id, receiver} = req.body;
         const result = await MessagesModel.deleteMessage({input: { username, id}})
         if (result === null) {
             return res.status(500).json({ message: 'Message not deleted' })
         }
+        const io = req.app.get('io');
+        io.to(`user:${receiver}`).emit('message:deleted', {id})
         return res.status(200).json({ message: 'Message deleted' })
     }
 
