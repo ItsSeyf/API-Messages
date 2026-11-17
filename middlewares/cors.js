@@ -4,7 +4,7 @@ export const acceptedOrigins=[
     'http://192.168.137.126:5173',
     'http://localhost:5173',
     'http://192.168.100.126:5173',
-    'https://tstchat.netlify.app'
+    'https://frontend-messages.onrender.com'
 ]
 
 export const corsMiddleware=({accepted_origins= acceptedOrigins}={})=>cors({

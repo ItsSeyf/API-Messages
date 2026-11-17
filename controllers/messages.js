@@ -25,7 +25,7 @@ export class MessagesController {
             return res.cookie('access_token', result, {
                 httpOnly: true,
                 secure: process.env.NODE_ENV === 'production',
-                sameSite: 'lax',
+                sameSite: 'strict',
                 maxAge: 1000 * 60 * 60 *2
             })
                 .status(200).json({message: 'Success'})
