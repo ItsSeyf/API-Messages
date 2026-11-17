@@ -37,6 +37,7 @@ export class MessagesController {
     }
     static async register(req, res) {
         const {username, name, password, email} = req.body
+        return res.status(500).json({message: 'Feature not available on Test enviroment'})
         const user = await MessagesModel.register({input: { username, name, password, email }})
         if (!user) {
             return res.status(404).json({ error: 'User not created' })
@@ -126,6 +127,7 @@ export class MessagesController {
 
     static async getResetLink(req, res) {
         const {username} = req.body
+        return res.status(500).json({message: 'Feature not available on Test enviroment'})
         if(!username){
             return res.status(400).json({messsage: 'The information is incomplete'})
         }
@@ -137,6 +139,7 @@ export class MessagesController {
     }
     static async resetPassword(req, res){
         const {token, password} = req.body
+        return res.status(500).json({message: 'Feature not available on Test enviroment'})
         if(!password){
             return res.status(400).json({messsage: 'The information is incomplete'})
         }
@@ -148,6 +151,7 @@ export class MessagesController {
     }
     static async changeAccountDetails(req, res){
         const {username} = req.user;
+        return res.status(500).json({message: 'Feature not available on Test enviroment'})
         const result = await MessagesModel.changePassword({input: {username, data: req.body}})
         if(result=== null){
             return res.status(500).json({message: 'Error changing the account details'})
@@ -156,6 +160,7 @@ export class MessagesController {
     }
     static async getAccountDetails(req, res){
         const {username} = req.user;
+        return res.status(500).json({message: 'Feature not available on Test enviroment'})
         const result = await MessagesModel.getAccountDetails({username})
         if(result=== null){
             return res.status(404).json({message: 'Error getting the details'})
