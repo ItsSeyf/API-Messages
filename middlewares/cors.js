@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 export const acceptedOrigins=[
     'http://192.168.137.126:5173',
     'http://localhost:5173',
-    'http://192.168.100.126:5173',
+    'https://chat.sofisticcode.com',
     'https://frontend-messages.onrender.com'
 ]
 
