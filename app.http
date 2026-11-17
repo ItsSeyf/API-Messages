@@ -13,7 +13,7 @@ Content-Type: application/json
 }
 
 ###Get messages
-GET  https://api-messages-loex.onrender.com:10000
+GET  https://api-messages-loex.onrender.com
 
 ###create message
 POST http://localhost:1234/messages/
