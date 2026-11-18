@@ -65,7 +65,7 @@ export class MessagesController {
         }
         const io = req.app.get('io');
         io.to(`user:${receiver}`).emit('agenda', result)
-        return res.status(200).json({ message: result })
+        return res.status(200).json(result)
     }
 
     static async getAgenda(req, res) {
@@ -88,7 +88,7 @@ export class MessagesController {
             return res.status(500).json({ error: 'User not blocked' })
         }
         const io = req.app.get('io');
-        io.to(`user:${receiver}`).emit('agenda:deleted', {username})
+        io.to(`user:${blocked}`).emit('agenda:deleted', username)
         return res.status(200).json({ message: 'User blocked successfully' })
     }
     static async unblock(req, res) {

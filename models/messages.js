@@ -131,11 +131,11 @@ export class MessagesModel {
                 sql: 'insert into agenda (username, person) values( :username, :person), (:person, :username)',
                 args: { username, person: receiver }
             })
-            const name = await db.execute({
+            const person = await db.execute({
                 sql: 'select username, name from users where username = :person',
                 args: {person: receiver}
             })
-            return result.rowsAffected > 0 ? name.rows[0] : null;
+            return result.rowsAffected > 0 ? person.rows[0] : null;
         } catch (e) {
             console.error(e);
             return null;
